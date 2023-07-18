@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.web.context.SaveContextOnUpdateOrErrorResponseWrapper;
 
 import java.io.IOException;
@@ -39,7 +40,7 @@ public class JwtUtil {
         this.objectMapper = objectMapper;
     }
     // new Date(LocalDateTime.now().getNano() + refreshTokenExpiration)
-
+    @Async
     public String refreshTokenGenerateToken(UserLoginEntityUserDetails username, HttpServletRequest httpServletRequest) {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + accessTokenExpiration);
@@ -56,6 +57,7 @@ public class JwtUtil {
                     .signWith(SignatureAlgorithm.HS512, secret)
                     .compact();
     }
+    @Async
     public String accessTokenGenerateToken(UserLoginEntityUserDetails username,  HttpServletRequest httpServletRequest) {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + accessTokenExpiration);

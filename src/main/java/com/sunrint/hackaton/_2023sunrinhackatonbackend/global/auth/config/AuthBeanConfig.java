@@ -27,7 +27,7 @@ public class AuthBeanConfig {
     }
     @Bean
     public PrincipalDetailsService principalDetailsService(){
-        return new PrincipalDetailsService(userAuthRepository());
+        return new PrincipalDetailsService(userRepository);
     }
     @Bean
     public UserAuthServiceImpl userAuthService() {

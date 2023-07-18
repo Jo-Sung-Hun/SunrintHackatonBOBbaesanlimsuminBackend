@@ -32,7 +32,7 @@ public class UserLoginEntityUserDetails implements UserDetails{
 
     @Override
     public String getUsername() {
-        return null;
+        return this.userLoginEntity.getUserLoginEmail();
     }
 
     @Override
@@ -49,6 +49,7 @@ public class UserLoginEntityUserDetails implements UserDetails{
     public boolean isCredentialsNonExpired() {
         return false;
     }
+
 
     @Override
     public boolean isEnabled() {

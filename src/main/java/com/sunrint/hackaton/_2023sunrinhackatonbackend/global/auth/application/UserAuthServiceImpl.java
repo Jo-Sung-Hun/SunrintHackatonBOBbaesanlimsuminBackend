@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Optional;
 
@@ -35,7 +36,7 @@ public class UserAuthServiceImpl implements UserAuthService {
     @Override
     public String login(UserLoginData userLoginData, HttpServletRequest httpServletRequest) throws JsonProcessingException {
         UserLoginEntityUserDetails result = (UserLoginEntityUserDetails) principalDetailsService.loadUserByUsername(userLoginData.getUserLoginEmail());
-        // 요청 정보와 조회 정보 검증 해줘
+
         if (!result.getPassword().equals(userLoginData.getUserLoginPassword())) {
             response(new ResponseEntity("비밀번호가 일치하지 않습니다.", null, 400));
         }
